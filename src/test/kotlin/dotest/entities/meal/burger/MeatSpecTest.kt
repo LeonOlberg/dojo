@@ -29,7 +29,7 @@ class MeatSpecTest : Spek({
     }
 
     describe("when asking for doneness") {
-        describe("and time is lower than 61") {
+        describe("and cook time is lower than 61") {
             it("should return extra rare") {
                 val meat = Meat()
                 val randomNumber = Random.nextLong(60)
@@ -37,6 +37,17 @@ class MeatSpecTest : Spek({
                 val subject = meat.grillCookTimer(randomNumber)
 
                 expect(subject).to.be.equal(GrillCook.EXTRA_RARE)
+            }
+        }
+
+        describe("and cook time is between 61 and 120") {
+            it("should return rare") {
+                val meat = Meat()
+                val randomNumber = Random.nextLong(61, 119)
+
+                val subject = meat.grillCookTimer(randomNumber)
+
+                expect(subject).to.be.equal(GrillCook.RARE)
             }
         }
     }
