@@ -4,6 +4,7 @@ import com.winterbe.expekt.expect
 import domain.entities.meal.burger.GrillCook
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
+import kotlin.random.Random
 
 class MeatSpecTest : Spek({
     describe("when asking if meat is ready") {
@@ -23,6 +24,19 @@ class MeatSpecTest : Spek({
                 val subject = meat.isReady()
 
                 expect(subject).to.be.`true`
+            }
+        }
+    }
+
+    describe("when asking for doneness") {
+        describe("and time is lower than 61") {
+            it("should return extra rare") {
+                val meat = Meat()
+                val randomNumber = Random.nextLong(60)
+
+                val subject = meat.grillCookTimer(randomNumber)
+
+                expect(subject).to.be.equal(GrillCook.EXTRA_RARE)
             }
         }
     }
